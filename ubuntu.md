@@ -49,3 +49,14 @@ your trade-offs.
 * There are network scanners that will bombard your platform contineously, usually probing for a follow up attack.
 * There are network scrapers that will use what is scraped for many purposes, e.g. indexing, training LLMs, etc.
 * Your cloud provider probably charges by a number of metrics including file storage, network traffic (maybe including DNS, routes, etc), and cpu usage.
+
+# Risks
+
+Each risk mitigation strategy will be different depending on the evaluation of each situation an individual has.  E.g. if it's no big deal to be down 
+for a couple of weeks and willing to rebuild platform from backups, then can focus on that and maybe less on other parts.  These notes will assume some
+simple middle ground that attempts to minimize the attack surface by limiting the services and hardening the services, but this can vary a lot by what the
+purpose of the platform is.  An email server with a web interface may only need to enable https access and a port for receiving mail.  An email server
+that allows access to 3rd party clients or the ability to send/relay mail will need to open up more remote access.
+
+Programs that run in containers can be particicularily tricky to ensure they are not exposing additional services/ports unexpectedly (which is one of the reasons
+why these notes are being written down, in that I don't know all the tricky cases yet).
