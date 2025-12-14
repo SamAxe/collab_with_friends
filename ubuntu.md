@@ -41,7 +41,7 @@ last modified:  2025/12/13 14:43
     # Exploit scanner
     apt install rkhunter
 
-Of course, all of these services should be configured for the purpose/risk tolerance of the system, often by updating `/etc/<service>/...` configuration files.
+All of these services should be configured for the purpose/risk tolerance of the system, often by updating `/etc/<service>/...` configuration files.
 
 * `systemctl enable <service>` effectively allows the service to be run and restarts the service after reboots
 * `systemctl start <service>` starts the service
@@ -54,7 +54,7 @@ These notes presume a need for a host to be on the internet and that you might b
 There are a number of risks of putting a machine on __the internet__ and these notes will attempt to capture some of risks and make some suggestions for consideration for
 your trade-offs.
 
-* Assume that the host will eventually become compromised,
+* Assume that the host will eventually become compromised, likely for pursposes of sending email spam, crypto mining, or becoming part of a botnet that will be used in future malicious activity.
   - I.e. there should be backups/recovery method
   - I.e. limit the compromise to the specific platform by not hosting from your house and spreading to other devices.
   - I.e. use a cloud provider, apply security patches, and take advantage of cloud provider infrastructure where it makes sense to do so.
