@@ -17,7 +17,12 @@ last modified:  2025/12/13 14:43
     systemctl enable ufw
     systemctl start ufw
 
+    # Log analyzer and blocks ip addresses that look like they are abusing the server
     apt install fail2ban
+    systemctl enable fail2ban
+    systemctl start fail2ban
+
+    # Ensures that security patches are applied regularily
     apt install unattended-upgrades
     systemctl enable unattened-upgrades
     systemctl start unattended-upgrades
@@ -30,8 +35,18 @@ last modified:  2025/12/13 14:43
     # Security Audit
     apt install lynis
 
+    # Security scanner
     apt install chkrootkit
+
+    # Exploit scanner
     apt install rkhunter
+
+Of course, all of these services should be configured for the purpose/risk tolerance of the system, often by updating `/etc/<service>/...` configuration files.
+
+* `systemctl enable <service>` effectively allows the service to be run and restarts the service after reboots
+* `systemctl start <service>` starts the service
+* `systemctl status <service>` shows the status
+* `systemctl restart <service>` restart the service 
 
 # Background/motivation
 
