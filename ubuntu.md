@@ -46,7 +46,18 @@ All of these services should be configured for the purpose/risk tolerance of the
 * `systemctl enable <service>` effectively allows the service to be run and restarts the service after reboots
 * `systemctl start <service>` starts the service
 * `systemctl status <service>` shows the status
-* `systemctl restart <service>` restart the service 
+* `systemctl restart <service>` restart the service
+
+## monitoring
+
+One thing to think about is how to monitor the instance.
+
+**Email** is one way of being notified.  This will need the ability to send/relay email from host to you and most likely will require a 3rd party
+service.  Local email delivery can be set up, and then SSH or access a webpage to review the email.
+
+**SSH** Remoting into the host and checking logs and any routine reports.
+
+**Cloud dashboard** can be another resource to check the vitals of some services.
 
 # Background/motivation
 
