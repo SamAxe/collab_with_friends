@@ -89,4 +89,25 @@ A producing farm would host the sites, pages, assets and owners of the sites wou
 An aggregating farm would poll and pull content from producing farms (or other aggregating farms).  It might provide aggregated search, backup, caching, etc type services but wouldn't have
 and content in the way that a producing farm does.
 
+# Rendering and resolution context and time
 
+Setting aside specific implementation details, a story is a list of paragraphs.  
+
+One question is whether the paragraphs should know that they are in a list with other paragraphs and therefore
+able to influence, or be influenced by, the other paragraphs. 
+
+Another question, viewing the story as a container of items, is nesting containers allowed and does it make sense?  For example,
+a story inside a story might be a section and the title would be a section heading then.
+
+
+
+
+# The uniqueness of paragraph id's
+
+What does a paragraph id mean?  Is it 1:1 replacement for a given version of text e.g. each version of text would have a unique `para.id`, or a tag for a container that holds text.  Currently, some differencing views use
+paragraphs with same id as a weak association that the paragraph was copied from another page.  Or some blessed paragraph id's are used to represent specific content across sites.  (I think there are stronger mechanisms to 
+achieve that function, but defer to later.)
+
+One view could be that a `(site,para.id)` is unique, that is the `para.id` uniqness is constrained to be within a site.  Another view is that `para.id` is globally unique.
+
+I tend to think that the first view has less surprises, but I think that does preclude some of the current implemented functionality with twin pages.
