@@ -99,8 +99,7 @@ able to influence, or be influenced by, the other paragraphs.
 Another question, viewing the story as a container of items, is nesting containers allowed and does it make sense?  For example,
 a story inside a story might be a section and the title would be a section heading then.
 
-
-
+Many protocols have a `.text` field that the user wrote and a `.rendered` field that caches whatever rendering happened, so that future rendering can use the cached values.  (This might address some of the container in container concerns...)
 
 # The uniqueness of paragraph id's
 
@@ -111,3 +110,8 @@ achieve that function, but defer to later.)
 One view could be that a `(site,para.id)` is unique, that is the `para.id` uniqness is constrained to be within a site.  Another view is that `para.id` is globally unique.
 
 I tend to think that the first view has less surprises, but I think that does preclude some of the current implemented functionality with twin pages.
+
+
+# Should the client be a webapp?
+
+One of the desired properties is that the content is accessible over many decades.
