@@ -17,6 +17,8 @@ let show_form ?message request =
       ; input [ name "message"; id "msg_id"; autofocus]
       ; input [ type_ "submit"; value "Send" ]
       ]
+    ; a [ href "/login" ] [txt "Log in"]
+    ; a [ href "/logout" ] [txt "Log out"]
     ]
   ]
   |> respond
@@ -31,7 +33,98 @@ let message_form_request_decoder =
 let message_form_handler request =
   match%lwt Dream_html.form message_form_request_decoder request with
   | `Ok message -> show_form ~message request
-  | _ -> failwith "error"
+
+  | `Invalid errors ->
+      (* `errors` is a list of (field_name * error_key) *)
+      let msg =
+        errors
+        |> List.map (fun (field, err) ->
+            Printf.sprintf "Field %s: %s" field err
+          )
+        |> String.concat "<br />"
+      in
+      Dream.html ("Form errors:<br />" ^ msg)
+  | `No_form -> Dream.html "No form data received"
+  | `Missing_token _ -> Dream.html "Missing token"
+  | `Many_tokens _ -> Dream.html "Many token"
+  | `Invalid_token _ -> Dream.html "Invalid_token token"
+  | `Wrong_session _ -> Dream.html "Wrong session"
+  | `Expired _ -> Dream.html "Expired"
+  | `Wrong_content_type -> Dream.html "Wrong content"
+
+
+
+let not_logged_in_greet_handler request =
+  let open Dream_html in
+  let open HTML in
+  html []
+  [ body []
+    [ form [ method_ `POST; action "/login"]
+      [ csrf_tag request
+      ; table []
+        [ tr []
+          [ td [] [ label [ for_ "username_id"] [ txt "Username" ] ]
+          ; td [] [ input [ type_ "text"; name "username"; id "username_id"; placeholder "Enter username"; autofocus] ]
+          ]
+        ; tr []
+          [ td [] [ label [ for_ "password_id"] [ txt "Password" ] ]
+          ; td [] [ input [ type_ "password"; name "password"; id "password_id"; placeholder "Enter password"] ]
+          ]
+        ; tr []
+          [ td [] [ ]
+          ; td [] [input [ type_ "submit"; value "Log in" ] ]
+          ]
+        ]
+
+      ]
+    ]
+  ]
+  |> respond
+
+let logout_handler request =
+  let open Dream_html in
+  let open HTML in
+  html []
+  [ body []
+    [ form [ method_ `GET; action "/login"]
+      [ csrf_tag request
+      ; input [ type_ "submit"; value "Log out" ]
+      ]
+    ]
+  ]
+  |> respond
+
+let login_form_request_decoder =
+  let open Dream_html.Form in
+  let+ username = required string "username"
+  and+ password = required string "password" in
+  (username,password)
+
+
+let login_form_handler request =
+  match%lwt Dream_html.form login_form_request_decoder request with
+  | `Ok (_username,_password) -> show_form ~message:"Logged in" request
+  | `Invalid errors ->
+      (* `errors` is a list of (field_name * error_key) *)
+      let msg =
+        errors
+        |> List.map (fun (field, err) ->
+            Printf.sprintf "Field %s: %s" field err
+          )
+        |> String.concat "<br />"
+      in
+      Dream.html ("Form errors:<br />" ^ msg)
+  | `No_form -> Dream.html "No form data received"
+  | `Missing_token _ -> Dream.html "Missing token"
+  | `Many_tokens _ -> Dream.html "Many token"
+  | `Invalid_token _ -> Dream.html "Invalid_token token"
+  | `Wrong_session _ -> Dream.html "Wrong session"
+  | `Expired _ -> Dream.html "Expired"
+  | `Wrong_content_type -> Dream.html "Wrong content"
+
+
+
+
 
 
 let () =
@@ -42,7 +135,11 @@ let () =
   @@ Dream.memory_sessions
   @@ Dream.router
     [ Dream.get  "/" show_form
-
     ; Dream.post "/" message_form_handler
+
+    ; Dream.get "/login" not_logged_in_greet_handler
+    ; Dream.post "/login" login_form_handler
+    ; Dream.get "/logout" logout_handler
+
 
     ]
