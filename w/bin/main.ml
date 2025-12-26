@@ -7,7 +7,7 @@ let show_form ?message request =
   [ body []
     [ begin
         match message with
-        | None -> p [] [ txt "(blank)" ]
+        | None -> p [] []
         | Some message ->
             p [] [ txt "You entered: %s" message ]
       end
@@ -22,6 +22,18 @@ let show_form ?message request =
   |> respond
 
 
+let message_form_request_decoder =
+  let open Dream_html.Form in
+  let+ greeting = required string "message" in
+  greeting
+
+
+let message_form_handler request =
+  match%lwt Dream_html.form message_form_request_decoder request with
+  | `Ok message -> show_form ~message request
+  | _ -> failwith "error"
+
+
 let () =
   Dream.run
     ~port:8081
@@ -31,12 +43,6 @@ let () =
   @@ Dream.router
     [ Dream.get  "/" show_form
 
-    ; Dream.post "/"
-        (fun request ->
-          match%lwt Dream.form request with
-          | `Ok ["message", message] -> show_form ~message request
-          | _ -> failwith "error"
-        )
-
+    ; Dream.post "/" message_form_handler
 
     ]
