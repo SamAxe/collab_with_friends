@@ -1,4 +1,6 @@
 (executable
  (public_name w)
  (name main)
- (libraries w))
+ (libraries w dream dream-html lwt_ppx)
+ (preprocess (pps dream-html.ppx lwt_ppx))
+)
