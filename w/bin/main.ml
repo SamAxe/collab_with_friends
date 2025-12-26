@@ -114,11 +114,24 @@ let login_form_request_decoder =
   (username,password)
 
 
+(* let _hashed_pwd = "sekret" *)
+let hashed_pwd = {|$argon2id$v=19$m=65536,t=2,p=1$QVFBTlNURlpIUQ$UFHXKohiBXmZtKLaAw6YbvhVt3mf2T7kcaQ7J/VYxq4|}
+
 let login_form_handler request =
   match%lwt Dream_html.form login_form_request_decoder request with
-  | `Ok (username,_password) ->
-      let%lwt () = Dream.set_session_field request "user" username in
-       Dream.redirect request "/"
+  | `Ok (username,password) ->
+      if Pwd.verify hashed_pwd password
+(*       if true *)
+      then
+        let hashed_pwd = Result.get_ok (Pwd.hash_password password) in
+        Dream.log "Hashed pwd is %s" hashed_pwd;
+
+        let%lwt () = Dream.invalidate_session request in
+        let%lwt () = Dream.set_session_field request "user" username in
+         Dream.redirect request "/"
+      else
+        show_form ~message:"Login failed, invalid username or password" request
+
   | `Invalid errors ->
       (* `errors` is a list of (field_name * error_key) *)
       let msg =
@@ -136,8 +149,6 @@ let login_form_handler request =
   | `Wrong_session _ -> Dream.html "Wrong session"
   | `Expired _ -> Dream.html "Expired"
   | `Wrong_content_type -> Dream.html "Wrong content"
-
-
 
 
 

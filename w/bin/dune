@@ -1,6 +1,6 @@
 (executable
  (public_name w)
  (name main)
- (libraries w dream dream-html lwt_ppx)
+ (libraries w dream dream-html lwt_ppx argon2)
  (preprocess (pps dream-html.ppx lwt_ppx))
 )
