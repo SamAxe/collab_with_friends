@@ -32,3 +32,12 @@ CREATE TABLE items (
   FOREIGN KEY(author_id) REFERENCES users(id)
 );
 
+
+DROP TABLE IF EXISTS dream_session;
+
+CREATE TABLE dream_session (
+  id TEXT PRIMARY KEY,
+  label TEXT NOT NULL,
+  expires_at REAL NOT NULL,
+  payload TEXT NOT NULL
+);
