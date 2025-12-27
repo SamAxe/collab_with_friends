@@ -164,6 +164,7 @@ let () =
     ~error_handler:Dream.debug_error_handler
     ~tls:true
   @@ Dream.logger
+  @@ Dream.sql_pool "sqlite3:test.db"
   @@ Dream.memory_sessions
   @@ Dream.router
     [ Dream.get  "/" show_form

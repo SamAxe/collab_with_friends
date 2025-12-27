@@ -1,6 +1,6 @@
 (executable
  (public_name w)
  (name main)
- (libraries w dream dream-html lwt_ppx argon2)
+ (libraries w dream dream-html lwt_ppx argon2 caqti-driver-sqlite3 caqti caqti-lwt lwt lwt.unix)
  (preprocess (pps dream-html.ppx lwt_ppx))
 )

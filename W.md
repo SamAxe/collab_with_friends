@@ -202,3 +202,35 @@ Unsure how much extended markdown will be supported initially. (e.g. paniolo sup
 ## Licensing
 
 There are bots, scrapers, etc...not sure if it makes sense for licenses to be per page/conversation or for the entire site or farm.
+
+This server code will be Apache-2.0 licensed, at least until I look at them more carefully.
+
+
+
+# Moderation
+
+I'm thinking that the user system will be by invite only, and that you are responsible for moderation escalation for the accounts that you invite.  In general, the community would
+be expected to do first level of moderation. Caveat:  I have no clue what moderation actual entails (e.g. at FB or Reddit levels), but hoping that several aspects of the design
+make it so that communities can self govern and moderate, because fundamentally this is still a small server that is a weak part of a decentralized and federated system.
+
+Design wise implications, there won't be a "sign up" or "create a new account" type flow, there will be an "invite someone" and "accept invitation" flows.
+  Some other, pretentious sounding to me, but could have cultural influence..."take up the invitation" "availing yourself of the invitation" "honoring the invitation" could
+  help set the tone of discourse.
+
+
+# Elections
+
+Extending the thought of invitation only for accounts and being moderation responsible for invitees, then what happens when the original account becomes inactive and
+there isn't a moderator for escalation.  How to choose the next moderator?
+
+I like the idea that a community has active members.  From those active members, a panel is selected who is charged with appointing/nominating a moderator.  There may need to be
+some declaring for moderation...  The panel members would not be eligible for being nominated as a moderator.  If nominating is used, then the only acceptance is the individual
+accepts the appointment.
+
+From a Draconian sense, an account could be suspended/downgraded until it was associated with a moderator in good standing, so that there is incentives for moderator participation.
+
+# Vision
+
+This system supports groups in collaborative artifact generation.  That is, that there are places where individuals can keep notes (writing to think), groups can collaborate (both semi-privately and semi-publicly).  The outward facing product is published web artifacts, whether that be micro blog, blog/essay, or longer works.
+
+There could be affordances for interoperability with other components in the broader ecosystem, whether that be ActivityPub, AT protocol, FedWiki, etc.
