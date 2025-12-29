@@ -25,7 +25,7 @@ CREATE TABLE items (
   next_id INTEGER,           -- NULL for the last item
   content TEXT NOT NULL,
   author_id INTEGER NOT NULL,
-  created_at INTEGER NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY(container_id) REFERENCES containers(id),
   FOREIGN KEY(parent_id) REFERENCES items(id),
   FOREIGN KEY(next_id) REFERENCES items(id),

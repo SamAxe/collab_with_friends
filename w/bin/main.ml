@@ -26,6 +26,7 @@ let show_form ?message request =
       ]
     ; a [ href "/login" ] [txt "Log in"]
     ; a [ href "/logout" ] [txt "Log out"]
+    ; a [ href "/topic" ] [txt "topic"]
     ]
   ]
   |> respond
@@ -173,6 +174,74 @@ let require_login handler request =
   | None -> Dream.redirect request "/login"
 
 
+(*
+White sunlight contains all visible colors (red, orange, yellow, green, blue, violet), each with different wavelengths.
+
+When sunlight enters the atmosphere, it hits tiny gas molecules (mostly nitrogen and oxygen) that scatter the light in all directions.
+
+Shorter wavelengths (blue and violet) scatter much more than longer wavelengths (like red). This process is called Rayleigh scattering.
+
+Even though violet scatters even more than blue, human eyes are better at detecting blue light, and some violet light is absorbed by the upper atmosphere.
+
+Because blue light is scattered across the whole sky, no matter where you look during the day, that scattered blue light enters your eyes—making the sky appear blue.
+
+*)
+
+
+let topic_handler request =
+  let open Dream_html in
+  let open HTML in
+
+  let%lwt result = Dream.sql request (Post.get_posts) in
+    begin
+      match result with
+      | Ok (posts:Post.db_post list) ->
+          begin
+            html []
+            [ head []
+              [ link [ rel "stylesheet"; href "static/pandoc.css" ]
+              ; link [ rel "stylesheet"; href "static/sidenote.css" ]
+              ]
+            ; body []
+              [ table []
+                [ tr []
+                  [ td [] [ txt "Title" ]
+                  ; td [] [ txt "Why is the skyyyy blue" ]
+                  ]
+                ; tr []
+                  [ td [] [ txt "Created by" ]
+                  ; td [] [ txt "Curios Child" ]
+                  ]
+                ; tr []
+                  [ td [] [ txt "Created on" ]
+                  ; td [] [ txt "today" ]
+                  ]
+                ]
+              ; ul [ ]
+                  (List.map ( fun (post:Post.db_post) ->
+                    li [ class_ "message" ]
+                      [ header [ class_ "message-header" ]
+                        [ strong [] [ txt "%s" post.author_id ]
+                        ; time [] [ txt "%s" post.created_at ]
+                        ]
+                        ; p [ class_ "sidenote" ] [ txt "sidenote" ]
+                        ; p [ class_ "message-text"] [ txt ~raw:true "%s" post.content ]
+                      ]
+                    )
+                  posts
+                  )
+              ]
+            ]
+            |> respond
+          end
+      | Error e ->
+          Dream.log "Get posts error %s" (Caqti_error.show e);
+          Dream.redirect request "/topic"
+      end
+
+
+
+
 let () =
   Dream.run
     ~port:8081
@@ -191,5 +260,7 @@ let () =
     ; Dream.post "/login" login_form_handler
     ; Dream.get "/logout" logout_handler
 
+    ; Dream.get "/topic" (require_login topic_handler)
+    ; Dream.get "/static/**" (Dream.static "./static/")
 
     ]

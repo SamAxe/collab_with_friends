@@ -1,0 +1,51 @@
+
+/* sup > a > .fn-label, */
+
+.sidenote,
+.marginnote {
+    float: right;
+    clear: right;
+    margin-right: -80%;
+    width: 50%;
+    margin-top: 0.3rem;
+    margin-bottom: 1em;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    vertical-align: baseline;
+    position: relative;
+    display: block;
+}
+
+.sidenote-number {
+    font-family: et-book-roman-old-style;
+    position: relative;
+    vertical-align: baseline;
+    font-size: 1rem;
+    top: -0.5rem;
+    left: 0.1rem;
+}
+
+/*
+.sidenote-number:after {
+    content: counter(sidenote-counter);
+}
+
+.sidenote:before {
+    content: counter(sidenote-counter) " ";
+    font-size: 1rem;
+    top: -0.5rem;
+}
+*/
+
+blockquote .sidenote,
+blockquote .marginnote {
+    margin-right: -82%;
+    min-width: 59%;
+    text-align: left;
+}
+
+.marginnote > code,
+.sidenote > code {
+    font-size: 1rem;
+}
+

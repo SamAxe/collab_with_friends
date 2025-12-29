@@ -242,3 +242,7 @@ There could be affordances for interoperability with other components in the bro
 The principle conversation will be a `topic` container with `post` items.  A `wiki` container will contain `item`s, and a document will be a single chunk of text.  Maybe I'll add a STOP based organizational setup too.
 
 I envision that there is a conversation -> wiki -> document progression, with a citation mechanism that can be referenced in any of the forms.
+
+# Item text
+
+I'm going to try and use a strict/bare html as what is stored for each item.  When an item is edited, we'll edit in raw HTML, convert the HTML to Markdown, text, or maybe another format or option over time.  This could easily not work out and modern apps usually have a text and rendered_text where they cache the generated output.  But if HTML proves to be sufficient, then that may make quite a few things easier.  It also allows for the first edit box to be edit raw html and defer the other things to later, but don't think this will be too severe of a decision to change later.
