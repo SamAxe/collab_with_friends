@@ -246,3 +246,11 @@ I envision that there is a conversation -> wiki -> document progression, with a 
 # Item text
 
 I'm going to try and use a strict/bare html as what is stored for each item.  When an item is edited, we'll edit in raw HTML, convert the HTML to Markdown, text, or maybe another format or option over time.  This could easily not work out and modern apps usually have a text and rendered_text where they cache the generated output.  But if HTML proves to be sufficient, then that may make quite a few things easier.  It also allows for the first edit box to be edit raw html and defer the other things to later, but don't think this will be too severe of a decision to change later.
+
+
+# UI
+
+My initial thought is that the conversation UI should encourage short and direct conversations and provide the affordances of a solid chat application, but in very limited way.  E.g. encourage lots of small threads (in contrast to forums which encourage a few number of infinite threads).  Maybe even capping the number of replies at like 100...but make it very easy to start a new conversation topic based on a mid conversation.  So while some nesting might be available, encourage the deliberate break and reframing of a specific topic.
+
+  * An IRC client might have 4 columns: timestamp, username, message content.  4th column has list of members in the channel.
+  * TODO (some other examples here)
