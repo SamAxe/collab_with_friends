@@ -67,6 +67,10 @@ be light access controls such that more than one owner could update pages, an ac
 Not fully thought though, but I think that `example.com/site1` plays better with the internet than `site1.example.com` does.  I think this would also impact how assets are referred to and would
 help with being able to export/import sites.
 
+Subdomain vs path to distinguish plots on a farm brings other administrative challenges to mind.
+* The dominant internet culture expects TLS certs. Proliferation of subdomains complicates management of both the names themselves and the TLS certs. DNS and TLS are each time-bound identity rental arrangements. When they expire on their own without human intervention they break access and identity.
+* The current URL representation of a lineup of pages limits what's possible for introducing path-based sites. See fedwiki/wiki-client#280 for further discussion.
+  `/view/welcome-visitors/site1.example.com/topic-of-interest`
 
 # Farm as aggregator vs Farm as a producer
 
