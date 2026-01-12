@@ -16,6 +16,10 @@ An approximate last modified date can selected by year, month, or day
 # Search by title
     title:"Welcome Visitors"
 
+# Search by embedded html
+
+Very experimental and work in progress...but HTML items (including SVG) have some processing to convert to text and are now accessible with the `html:` tag.
+
 
 # Wildcards
 
