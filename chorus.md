@@ -14,4 +14,5 @@ This is some brainstorming/notes/ideas for a server inspired by Federated Wiki a
 4. TBD what the journaling mechanism is, but quite likely text diff of the html.
 5. A central toolkit will be based around HTML rewriting (e.g. a version of xsltproc or something).  E.g. to change all the hrefs from one site to another would be a source pattern and target pattern.
 6. Most likely based on an sqlite3 database.  These can be performant for the kinds of operations and scales this project is likely to encounter.
-7. The tool needs to make developing collaborative content easy and allow for high quality web publishing options.  This likely implies that there are versions, need to support multiple authors, internal comments, etc. 
+7. The tool needs to make developing collaborative content easy and allow for high quality web publishing options.  This likely implies that there are versions, need to support multiple authors, internal comments, etc.
+8. "custom" plugin support will largely be provided by HTML templates.  E.g. `<img ...>` will make for an image plugin.  A very simple DSL can make for a generic interactive wizard for creating, editing, etc.
