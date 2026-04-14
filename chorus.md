@@ -16,3 +16,14 @@ This is some brainstorming/notes/ideas for a server inspired by Federated Wiki a
 6. Most likely based on an sqlite3 database.  These can be performant for the kinds of operations and scales this project is likely to encounter.
 7. The tool needs to make developing collaborative content easy and allow for high quality web publishing options.  This likely implies that there are versions, need to support multiple authors, internal comments, etc.
 8. "custom" plugin support will largely be provided by HTML templates.  E.g. `<img ...>` will make for an image plugin.  A very simple DSL can make for a generic interactive wizard for creating, editing, etc.
+9. A farm, and the users and sites of farm, can set areas to public, farm, or individual access.  This way, content can be currated from the bottom up and released to a broader audience.
+10. There will be some level of user management, logging in, etc.  In concept, everything in development could be encrypted at rest and only public items would be unencrypted. (members of the farm with access would have their own keys to decrypt farm viewable content).
+    - Inter-farm access will be a future problem, if this project is ever successful enough to have that problem.
+11. Support site refactoring, that might include:
+   - Renaming a site, moving a site (within farm or to another farm), deleting a site, copying a site.
+
+12. Link management/persistence
+    - Namely offer redirect options for external references and bulk update within a farm.
+13. It's expected that the members of a farm are cooperating and not advesarial.  If it becomes advesarial, then the members should be able to take their content and start a new farm, e.g. should be easy to export a serialization of content (maybe an SQL dump?) for a new farm/site.
+14. The Farm will have to establish the license for content on the farm and enforce that with the members.
+15. Assets are something that should be thought about and designed.  The main attribute is that they aren't necessarily versioned and are global across sites....Certainly needs more thought put into it.
